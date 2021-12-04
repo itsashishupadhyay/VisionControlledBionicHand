@@ -71,3 +71,5 @@ Please fell free to reach out to me at `itsashishupadhyay@gmail.com` for any que
 
 ## Demo
 Please fell free to check out the [Demo Video](https://youtu.be/dBysV4OpSVE) at `https://youtu.be/dBysV4OpSVE`
+![AWS Screenshot](https://github.com/itsashishupadhyay/VisionControlledBionicHand/blob/master/images/AwsTest.png)
+![Working Screenshot](https://github.com/itsashishupadhyay/VisionControlledBionicHand/blob/master/images/Demo.jpeg)
