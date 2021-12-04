@@ -1,0 +1,108 @@
+# put here your custom config value
+menu "BionicArm Configuration"
+    AWS_CLIENT_NAME := YOUR_THING_NAME
+
+    config ESP_WIFI_SSID
+        string "WiFi SSID"
+        default "SSID"
+        help
+        SSID (network name) for the AWS to connect to.
+
+    config ESP_WIFI_PASSWORD
+        string "WiFi Password"
+        default "PASSWORD"
+        help
+        WiFi password (WPA or WPA2) for the AWS to use.
+
+    config ESP_MAXIMUM_RETRY
+        int "Maximum retry"
+        default 5
+        help
+            Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
+    config  AWS_IOT_MQTT_HOST
+        string  "AWS IOT MQTT HOST"
+        default "AWSIoTSettingsHasHostName.us-east-2.amazonaws.com"
+        help
+            Each of your things has a REST API available at this endpoint. MQTT clients and AWS IoT Device SDKs also use this endpoint.
+
+    config  AWS_IOT_MQTT_PORT
+        int  "AWS IOT MQTT port"
+        default 8883
+        help
+            AWS IOT Mqtt Default port 8883 or 443.
+
+    config  AWS_IOT_MQTT_TX_BUF_LEN
+        int  "AWS IOT Transmitt Buffer size"
+        default 1024
+        help
+            AWS IOT Transmitt Buffer Length
+
+    config  AWS_IOT_MQTT_RX_BUF_LEN
+        int  "AWS IOT Recieve Buffer"
+        default 1024
+        help
+            AWS IOT Recieve Buffer Length
+
+    config AWS_THING_NAME
+        string "AWS IoT Client ID"
+        default "$(AWS_CLIENT_NAME)"
+        help
+            AWS IoT Client ID for the AWS. Should be unique for every device.
+        
+    config AWS_CLIENT_ID
+        string "AWS IoT Client ID"
+        default "$(AWS_CLIENT_NAME)"
+        help
+            AWS IoT Client ID for the AWS. Should be unique for every device.
+
+    config AWS_TOPIC_SUB
+        string "AWS IoT MQTT SUB Topic"
+        default "pull/$(AWS_CLIENT_NAME)"
+        help
+            AWS IoT MQTT Subscription Topic. Should be unique for every device.
+
+    config AWS_TOPIC_PUB
+        string "AWS IoT PUB TOPIC"
+        default "push/$(AWS_CLIENT_NAME)"
+        help
+            AWS IoT MQTT Publication Topic. Should be unique for every device.
+
+    choice AWS_CERT_SOURCE
+        prompt "AWS IoT Certificate Source"
+        default AWS_EMBEDDED_CERTS
+        help
+            AWS IoT requires loading of a device-specific certificate and private key,
+            and a common Root CA Certificate. These can be compiled into the AWS
+            app, or they can be loaded via the filesystem from an SD card.
+
+        config AWS_EMBEDDED_CERTS
+            bool "Embed into app"
+        config AWS_SDCARD_CERTS
+            bool "Load from SD card"
+            select AWS_FILESYSTEM_CERTS
+    endchoice
+
+    # Currently this is equivalent to AWS_SDCARD_CERTS,
+    # however eventually we want to support more filesystem
+    # sources (SPIFFS, etc.) So this hidden config item
+    # is selected whenever the item should load from filesystem.
+    config AWS_FILESYSTEM_CERTS
+        bool
+
+    config AWS_CERTIFICATE_PATH
+        string "Device Certificate Path"
+        depends on AWS_FILESYSTEM_CERTS
+        default "/sdcard/certificate.pem.crt"
+
+    config AWS_PRIVATE_KEY_PATH
+        string "Device Private Key Path"
+        depends on AWS_FILESYSTEM_CERTS
+        default "/sdcard/private.pem.key"
+
+    config AWS_ROOT_CA_PATH
+        string "Root CA Certificate Path"
+        depends on AWS_FILESYSTEM_CERTS
+        default "/sdcard/aws-root-ca.pem"
+
+endmenu
+
