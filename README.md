@@ -7,6 +7,8 @@
 > **Build a wireless gesture-controlled robotic hand using computer vision, ESP32, and cloud IoT**
 > Perfect for robotics projects, IoT learning, prosthetics research, and embedded systems portfolios
 
+![Bionic Arm Demo](images/Bionic_Arm.gif)
+
 ## Overview
 
 A complete **Internet of Things (IoT) project** that demonstrates **real-time gesture control of a 5-finger robotic hand from anywhere in the world**. This embedded systems project combines **Python computer vision** (MediaPipe hand tracking), **ESP32 microcontroller programming** with FreeRTOS, **AWS IoT Core MQTT messaging**, and **servo motor control** via I2C communication. Ideal for **university capstone projects**, **robotics competitions**, **final year engineering projects**, and learning **wireless IoT architecture**.
